@@ -1,20 +1,25 @@
 import z from 'zod';
 
-export const Reports = z.object({
+export const Report = z.object({
 	id: z.string(),
-	reportType: z.string(),
 	name: z.string(),
-	webUrl: z.string(),
 	embedUrl: z.string(),
-	isOwnedByMe: z.boolean(),
-	datasetId: z.string(),
-	datasetWorkspaceId: z.string(),
-	users: z.array(z.unknown()),
-	subscriptions: z.array(z.unknown())
+});
+
+export const Dashboard = z.object({
+	id: z.string(),
+	displayName: z.string(),
+	embedUrl: z.string(),
 });
 
 export const GetReportsResponse = z.object({
-	value: z.array(Reports)
+	value: z.array(Report)
 });
 
+export const GetDashboardsResponse = z.object({
+	value: z.array(Dashboard)
+});
+
+
 export type TGetReportsResponse = z.infer<typeof GetReportsResponse>;
+export type TGetDashboardsResponse = z.infer<typeof GetDashboardsResponse>;
