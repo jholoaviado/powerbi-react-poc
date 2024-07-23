@@ -16,7 +16,7 @@ export const AppLayout = () => {
 
 				<div className='flex flex-grow w-full h-full'>				
 					<div className='flex flex-col w-full h-full bg-background'>
-						<div className='flex-grow ml-[60px] overflow-hidden'>
+						<div className='flex-grow ml-[60px] overflow-hidden z-30'>
 							<Outlet />
 						</div>
 					</div>

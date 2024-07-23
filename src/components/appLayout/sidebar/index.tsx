@@ -90,7 +90,7 @@ export const Sidebar = (props: ISidebar) => {
 					return (
 						<div className='flex flex-row py-1 group' key={item.id}>
 							<Tooltip
-								className='bg-yellow-500 text-white text-xs p-2 whitespace-nowrap z-10'
+								className='bg-yellow-500 text-white text-xs p-2 whitespace-nowrap z-50'
 								message={item.name}
 								position='right'
 								isVisible={!props.isSidebarOpen}
@@ -135,7 +135,7 @@ export const Sidebar = (props: ISidebar) => {
 			<div
 				className={classNames(
 					props.isSidebarOpen ? 'w-[350px]' : 'w-[60px]',
-					'absolute flex flex-shrink-0 flex-row pt-[65px] p-4 bg-[#38393c] h-fit min-h-full gap-4 transition-all duration-500 ease-in-out'
+					'absolute flex flex-shrink-0 flex-row pt-[65px] p-4 bg-[#38393c] h-fit min-h-full gap-4 transition-all duration-500 ease-in-out z-40'
 				)}
 			>
 				{renderReports()}
