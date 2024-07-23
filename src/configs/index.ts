@@ -1,10 +1,10 @@
-import { CLIENT_ID } from '../constants';
+import { CLIENT_ID, REDIRECT_URI } from '../constants';
 
 export const msalConfig = {
 	auth: {
 		clientId: CLIENT_ID,
+		redirectUri: REDIRECT_URI,
 		authority: 'https://login.microsoftonline.com/organizations',
-		redirectUri: 'http://localhost:5173',
 		postLogoutRedirectUri: '/',
 		navigateToLoginRequestUrl: false,
 	},
