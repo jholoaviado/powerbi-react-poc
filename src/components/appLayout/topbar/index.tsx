@@ -1,9 +1,6 @@
 import { Bars3Icon, XCircleIcon } from '@heroicons/react/24/outline';
 import Button from '../../button';
 import { classNames } from '../../../utils/common';
-// import { useAtomValue } from 'jotai';
-// import { tokenAtom } from '../../../store/authAtoms';
-// import { AUTH_URL } from '../../../constants';
 import { login } from '../../../utils/msal';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { useAtom, useSetAtom } from 'jotai';
