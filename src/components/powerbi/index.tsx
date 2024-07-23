@@ -26,11 +26,31 @@ export const PowerBIReport = () => {
 
 	
 	useEffect(() => {
-		// if (report == null) return
-		// powerbi.reset(report)
 		const reportContainer = document.getElementById("reportEmbedded");
-		reportContainer && powerbi.reset(reportContainer);
+		if (activeItem && reportContainer) {
+			powerbi.reset(reportContainer);
 		
+			const config = {
+				type: activeItem?.type.toLowerCase(),
+				id: activeItem?.id,
+				embedUrl: activeItem?.embedUrl,
+				accessToken: token,
+				tokenType: models.TokenType.Aad,
+				settings: {
+					panes: {
+						filters: {
+							expanded: false,
+							visible: false
+						}
+					},
+					// layoutType: models.LayoutType.MobilePortrait
+					// background: models.BackgroundType.Transparent,
+				}
+			}
+			
+			const report = powerbi.embed(reportContainer, config) as Report;
+			console.log(report);
+		}
 	}, [isAuthenticated, token, activeItem])
 	
 	const renderPowerBIEmbeddings = () => {
@@ -43,7 +63,7 @@ export const PowerBIReport = () => {
 					id: activeItem?.id,
 					embedUrl: activeItem?.embedUrl,
 					accessToken: token,
-					tokenType: models.TokenType.Aad, // Use models.TokenType.Aad for SaaS embed
+					tokenType: models.TokenType.Aad,
 					settings: {
 						panes: {
 							filters: {
@@ -68,7 +88,6 @@ export const PowerBIReport = () => {
 				
 				getEmbeddedComponent = { (embeddedReport) => {
 					window.report = embeddedReport as Report;
-					// setReport(embeddedReport as Report);
 				}}
 			/>
 		)

@@ -14,7 +14,7 @@ export const Home = () => {
 	// };
 
 	return (
-		<div className='flex w-full h-full justify-center items-center'>
+		<div id='reportEmbedded' className='flex w-full h-full justify-center items-center'>
 			<PowerBIReport />
 			{/* <SessionExpiredModal
 				showModal={showModal}

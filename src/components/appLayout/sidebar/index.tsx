@@ -35,7 +35,7 @@ export const Sidebar = (props: ISidebar) => {
 			
 			setActiveItem(sortedItems[0])
 		}
-	}, [items])
+	}, [items]);
 
 	const { isLoading: isGetReportsLoading } = useQuery<TGetReportsResponse, AxiosError>({
 		queryKey: ['reports'],
