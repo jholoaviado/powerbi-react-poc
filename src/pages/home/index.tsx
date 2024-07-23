@@ -1,10 +1,27 @@
-import { PowerBIReport } from '../../components/powerbi'
+// import { useState } from 'react';
+// import { SessionExpiredModal } from '../../components/modals/sessionExipredModal';
+import { PowerBIReport } from '../../components/powerbi';
 
 export const Home = () => {
+	// const [showModal, setShowmodal] = useState<boolean>(true);
+
+	// const onClickContinue = () => {
+	// 	return;
+	// };
+
+	// const onClickLeave = () => {
+	// 	setShowmodal(false);
+	// };
+
 	return (
 		<div className='flex w-full h-full justify-center items-center'>
-			{/* <p className='text-2xl text-yellow-500 font-extrabold'>HELLO</p> */}
 			<PowerBIReport />
+			{/* <SessionExpiredModal
+				showModal={showModal}
+				setShowmodal={setShowmodal}
+				onClickContinue={onClickContinue}
+				onClickLeave={onClickLeave}
+			/> */}
 		</div>
-	)
-}
+	);
+};

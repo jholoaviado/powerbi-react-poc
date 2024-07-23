@@ -12,8 +12,46 @@ const getTokenFromLocalStorage = () => {
 	return initialToken;
 };
 
+const getRefreshTokenFromLocalStorage = () => {
+	const initialRefreshToken = '';
+
+	const refreshToken = localStorage.getItem('refreshToken');
+
+	if (refreshToken) {
+		return refreshToken;
+	}
+
+	return initialRefreshToken;
+};
+
+const getUserNameFromLocalStorage = () => {
+	const initialUserName = '';
+
+	const userName = localStorage.getItem('userName');
+
+	if (userName) {
+		return userName;
+	}
+
+	return initialUserName;
+};
+
+const getUserEmailFromLocalStorage = () => {
+	const initialUserEmail = '';
+
+	const userEmail = localStorage.getItem('userEmail');
+
+	if (userEmail) {
+		return userEmail;
+	}
+
+	return initialUserEmail;
+};
 
 const currentToken = atom<string>(getTokenFromLocalStorage())
+const currentRefreshToken = atom<string>(getRefreshTokenFromLocalStorage())
+const currentUserName = atom<string>(getUserNameFromLocalStorage())
+const currentUserEmail = atom<string>(getUserEmailFromLocalStorage())
 
 export const tokenAtom = atom(
 	(get) => get(currentToken),
@@ -22,3 +60,29 @@ export const tokenAtom = atom(
 		localStorage.setItem('token', data)
 	},
 );
+
+export const refreshTokenAtom = atom(
+	(get) => get(currentRefreshToken),
+	(_, set, data: string) => {
+		set(currentRefreshToken, data);
+		localStorage.setItem('refreshToken', data)
+	},
+);
+
+export const userNameAtom = atom(
+	(get) => get(currentUserName),
+	(_, set, data: string) => {
+		set(currentUserName, data);
+		localStorage.setItem('userName', data)
+	},
+);
+
+export const userEmailAtom = atom(
+	(get) => get(currentUserEmail),
+	(_, set, data: string) => {
+		set(currentUserEmail, data);
+		localStorage.setItem('userEmail', data)
+	},
+);
+
+export const isTokenExpired = atom<boolean>(true);

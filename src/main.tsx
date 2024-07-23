@@ -3,6 +3,11 @@ import App from './App.tsx'
 import './index.css'
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'jotai';
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import { msalConfig } from './configs/index.ts';
+
+const publicClientApplication = new PublicClientApplication(msalConfig);
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -13,9 +18,11 @@ const queryClient = new QueryClient({
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<Provider>
-		<QueryClientProvider client={queryClient}>
-			<App />
-		</QueryClientProvider>
-	</Provider>,
+	<MsalProvider instance={publicClientApplication}>
+		<Provider>
+			<QueryClientProvider client={queryClient}>
+				<App />
+			</QueryClientProvider>
+		</Provider>
+	</MsalProvider>,
 )

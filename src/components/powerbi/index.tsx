@@ -1,8 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import *  as pbi from 'powerbi-client';
 import { PowerBIEmbed } from 'powerbi-client-react';
 import { models, Report } from 'powerbi-client';
 import { useAtomValue } from 'jotai';
 import { tokenAtom } from '../../store/authAtoms';
 import { activeItemAtom } from '../../store/powerbiAtoms';
+import { useEffect } from 'react';
+import { useIsAuthenticated } from '@azure/msal-react';
 
 declare global {
 	interface Window {
@@ -11,8 +15,23 @@ declare global {
 }
 
 export const PowerBIReport = () => {
+	const isAuthenticated = useIsAuthenticated();
+	
+	// const [report, setReport] = useState<Report | null>(null);
+	
 	const token = useAtomValue(tokenAtom);
 	const activeItem = useAtomValue(activeItemAtom);
+	
+	const powerbi = new pbi.service.Service(pbi.factories.hpmFactory, pbi.factories.wpmpFactory, pbi.factories.routerFactory);
+
+	
+	useEffect(() => {
+		// if (report == null) return
+		// powerbi.reset(report)
+		const reportContainer = document.getElementById("reportEmbedded");
+		reportContainer && powerbi.reset(reportContainer);
+		
+	}, [isAuthenticated, token, activeItem])
 	
 	const renderPowerBIEmbeddings = () => {
 		return (
@@ -32,6 +51,7 @@ export const PowerBIReport = () => {
 								visible: false
 							}
 						},
+						// layoutType: models.LayoutType.MobilePortrait
 						// background: models.BackgroundType.Transparent,
 					}
 				}}
@@ -48,6 +68,7 @@ export const PowerBIReport = () => {
 				
 				getEmbeddedComponent = { (embeddedReport) => {
 					window.report = embeddedReport as Report;
+					// setReport(embeddedReport as Report);
 				}}
 			/>
 		)
@@ -55,7 +76,7 @@ export const PowerBIReport = () => {
 	
 	return (
 		<>
-			{ activeItem && renderPowerBIEmbeddings() }
+			{ (isAuthenticated && activeItem && token) && renderPowerBIEmbeddings() }
 		</>
 	)
 }

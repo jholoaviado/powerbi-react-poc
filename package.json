@@ -10,19 +10,26 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@azure/msal-browser": "^3.19.1",
+    "@azure/msal-react": "^2.0.21",
+    "@headlessui/react": "^1.7.10",
     "@heroicons/react": "^2.1.5",
     "axios": "^1.7.2",
     "jotai": "^2.9.0",
     "powerbi-client-react": "^1.4.0",
+    "qs": "^6.12.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.25.1",
+    "request": "^2.88.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/qs": "^6.9.15",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/request": "^2.48.12",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
     "@vitejs/plugin-react": "^4.3.1",

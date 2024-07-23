@@ -135,7 +135,7 @@ export const Sidebar = (props: ISidebar) => {
 			<div
 				className={classNames(
 					props.isSidebarOpen ? 'w-[350px]' : 'w-[60px]',
-					'absolute flex flex-shrink-0 flex-row pt-[65px] p-4 bg-[#38393c] h-fit gap-4 transition-all duration-500 ease-in-out'
+					'absolute flex flex-shrink-0 flex-row pt-[65px] p-4 bg-[#38393c] h-fit min-h-full gap-4 transition-all duration-500 ease-in-out'
 				)}
 			>
 				{renderReports()}
