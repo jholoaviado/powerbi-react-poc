@@ -205,9 +205,16 @@ export const Sidebar = (props: ISidebar) => {
 						'flex-grow border-t border-gray-300',
 						props.isSidebarOpen ? 'visible' : 'hidden'
 					)} /> 
-				</div> 					
+				</div> 
+
+				<p className={classNames(
+					'px-4 italic text-xs text-center text-nowrap',
+					(props.isSidebarOpen && items.length < 1) ? 'visible' : 'hidden'
+				)}> 
+					Your workspace is empty.
+				</p>				
 				
-				{ renderReports(items) }
+				{renderReports(items)} 
 			</div>
 		</div>
 	);
