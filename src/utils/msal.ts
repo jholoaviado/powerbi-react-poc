@@ -24,14 +24,7 @@ export const getAccessToken = async (instance: IPublicClientApplication) => {
 }
 
 export const logout = async (instance: IPublicClientApplication, homeAccountId: string) => {
-	// const logoutRequest = {
-	// 	account: instance.getAccountByHomeId(homeAccountId),
-	// 	postLogoutRedirectUri: '/',
-	// };
-	
 	const currentAccount = instance.getAccountByHomeId(homeAccountId);
-	
-	console.log('currentAccount', currentAccount);
-	
+		
 	instance.logoutPopup({ account: currentAccount });
 }

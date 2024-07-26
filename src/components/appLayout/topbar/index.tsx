@@ -35,9 +35,9 @@ export const Topbar = (props: ITopbar) => {
 
 	const handleSignOut = async () => {
 		await logout(instance, homeAccountId);
-		// localStorage.clear();
-		// sessionStorage.clear();
-		// navigate('/');
+		localStorage.clear();
+		sessionStorage.clear();
+		navigate('/');
 	}
 	
 	return (
