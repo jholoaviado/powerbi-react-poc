@@ -1,11 +1,12 @@
-import { Bars3Icon, XCircleIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, PowerIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import Button from '../../button';
 import { classNames } from '../../../utils/common';
-import { login } from '../../../utils/msal';
-import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import { login, logout } from '../../../utils/msal';
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { useAtom, useSetAtom } from 'jotai';
-import { tokenAtom, userEmailAtom, userNameAtom } from '../../../store/authAtoms';
+import { homeAccountIdAtom, tokenAtom, userEmailAtom, userNameAtom } from '../../../store/authAtoms';
 import { useNavigate } from 'react-router-dom';
+import Tooltip from '../../tooltip';
 
 interface ITopbar {
 	isSidebarOpen: boolean;
@@ -19,15 +20,24 @@ export const Topbar = (props: ITopbar) => {
 	const navigate = useNavigate();
 	
 	const setToken = useSetAtom(tokenAtom);
+	const [homeAccountId, setHomeAccountId] = useAtom(homeAccountIdAtom);
 	const [userName, setUserName] = useAtom(userNameAtom);
 	const [userEmail, setUserEmail] = useAtom(userEmailAtom);
 	
 	const handleSignIn = async () => {
 		const response = await login(instance);
 		setToken(response?.accessToken);
+		setHomeAccountId(response?.account?.homeAccountId);
 		setUserName(response?.account?.name || '');
 		setUserEmail(response?.account?.username || '');
 		navigate('/home');
+	}
+
+	const handleSignOut = async () => {
+		await logout(instance, homeAccountId);
+		// localStorage.clear();
+		// sessionStorage.clear();
+		// navigate('/');
 	}
 	
 	return (
@@ -49,26 +59,52 @@ export const Topbar = (props: ITopbar) => {
 				<p className='text-xl font-extrabold text-yellow-500'>PowerBI File Directory</p>
 			</div>
 			
-			{/* <a href={AUTH_URL}> */}
-			<Button
-				variant='primary'
-				className={classNames(
-					'px-8 py-1 text-sm rounded-full',
-					(isAuthenticated) ? 'hidden' : 'visible'
-				)}
-				onClick={() => handleSignIn()}
-			>
-				Sign In
-			</Button>
-			
-			{/* </a> */}
-
 			<div className={classNames(
-				'flex flex-col items-end',
-				(isAuthenticated) ? 'visible' : 'hidden'
+				'flex items-center',
+				(isAuthenticated) ? 'gap-4' : ''
 			)}>
-				<p className='font-semibold'>{userName}</p>
-				<p className='italic text-xs'>{userEmail}</p>
+				<UnauthenticatedTemplate>
+					{/* <a href={AUTH_URL}> */}
+					<Button
+						variant='primary'
+						className={classNames(
+							'px-8 py-1 text-sm rounded-full',
+							// (isAuthenticated) ? 'hidden' : 'visible'
+						)}
+						onClick={() => handleSignIn()}
+					>
+						Sign In
+					</Button>
+					
+					{/* </a> */}
+				</UnauthenticatedTemplate>
+				
+				<AuthenticatedTemplate>
+					<div className={classNames(
+						'hidden lg:flex flex-col items-end',
+						// (isAuthenticated) ? 'visible' : 'hidden'
+					)}>
+						<p className='font-semibold'>{userName}</p>
+						<p className='italic text-xs'>{userEmail}</p>
+					</div>
+					
+					<Tooltip
+						className='bg-yellow-500 text-white text-xs p-2 whitespace-nowrap z-50'
+						message='Sign Out'
+						position='left'
+						isVisible={!props.isSidebarOpen}
+					>
+						<div className={classNames( 
+							'flex flex-shrink-0 justify-center items-center p-1.5 w-8 h-8 bg-red-500 rounded-full border-2 group-hover:bg-red-700 cursor-pointer',
+							// (isAuthenticated) ? 'visible' : 'hidden'
+						)}>
+							<PowerIcon
+								className='text-white w-full h-full'
+								onClick={() => handleSignOut()}
+							/>
+						</div>
+					</Tooltip>
+				</AuthenticatedTemplate>
 			</div>
 		</div>
 	)

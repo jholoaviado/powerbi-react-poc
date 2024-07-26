@@ -24,6 +24,18 @@ const getRefreshTokenFromLocalStorage = () => {
 	return initialRefreshToken;
 };
 
+const getHomeAccountIdFromLocalStorage = () => {
+	const initialHomeAccountId = '';
+
+	const homeAccountId = localStorage.getItem('homeAccountId');
+
+	if (homeAccountId) {
+		return homeAccountId;
+	}
+
+	return initialHomeAccountId;
+};
+
 const getUserNameFromLocalStorage = () => {
 	const initialUserName = '';
 
@@ -48,10 +60,11 @@ const getUserEmailFromLocalStorage = () => {
 	return initialUserEmail;
 };
 
-const currentToken = atom<string>(getTokenFromLocalStorage())
-const currentRefreshToken = atom<string>(getRefreshTokenFromLocalStorage())
-const currentUserName = atom<string>(getUserNameFromLocalStorage())
-const currentUserEmail = atom<string>(getUserEmailFromLocalStorage())
+const currentToken = atom<string>(getTokenFromLocalStorage());
+const currentRefreshToken = atom<string>(getRefreshTokenFromLocalStorage());
+const currentHomeAccountId = atom<string>(getHomeAccountIdFromLocalStorage());
+const currentUserName = atom<string>(getUserNameFromLocalStorage());
+const currentUserEmail = atom<string>(getUserEmailFromLocalStorage());
 
 export const tokenAtom = atom(
 	(get) => get(currentToken),
@@ -68,6 +81,15 @@ export const refreshTokenAtom = atom(
 		localStorage.setItem('refreshToken', data)
 	},
 );
+
+export const homeAccountIdAtom = atom(
+	(get) => get(currentHomeAccountId),
+	(_, set, data: string) => {
+		set(currentHomeAccountId, data);
+		localStorage.setItem('homeAccountId', data)
+	},
+);
+
 
 export const userNameAtom = atom(
 	(get) => get(currentUserName),
