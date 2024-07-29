@@ -34,6 +34,13 @@ export const Sidebar = (props: ISidebar) => {
 			embedUrl: 'https://app.powerbi.com/reportEmbed?reportId=a4acd01d-6a98-4a50-8a6b-b2c010a1a74d&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVNPVVRILUVBU1QtQVNJQS1CLVBSSU1BUlktcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQiLCJlbWJlZEZlYXR1cmVzIjp7InVzYWdlTWV0cmljc1ZOZXh0Ijp0cnVlfX0%3d',
 			type: 'Report',
 			category: 'featured'
+		},
+		{
+			id: '9798288e-a629-4e51-aec1-7f8b9a5ea768',
+			name: 'Financial Sample',
+			embedUrl: 'https://app.powerbi.com/reportEmbed?reportId=9798288e-a629-4e51-aec1-7f8b9a5ea768&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVNPVVRILUVBU1QtQVNJQS1CLVBSSU1BUlktcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQiLCJlbWJlZEZlYXR1cmVzIjp7InVzYWdlTWV0cmljc1ZOZXh0Ijp0cnVlfX0%3d',
+			type: 'Report',
+			category: 'featured',
 		}
 	]
 	
